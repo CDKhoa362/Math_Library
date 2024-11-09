@@ -1,4 +1,4 @@
-from sympy import singularities, symbols, limit, Reals, Complement
+from sympy import singularities, symbols, limit, Reals, Complement, solveset
 
 class Calculus:
     def __init__(self, fx):
@@ -15,7 +15,7 @@ class Calculus:
         """
         try:
             singularity = singularities(self.fx, self.x)
-            domain = Complement(Reals, singularity)
+            domain = Complement(solveset(self.fx, self.x, domain=Reals), singularity)
             return [singularity, domain]
 
         except ZeroDivisionError as e:
